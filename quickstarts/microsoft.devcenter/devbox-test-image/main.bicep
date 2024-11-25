@@ -66,35 +66,35 @@ resource successLogs 'Microsoft.Resources/deploymentScripts/logs@2020-10-01' exi
   name: 'default'
 }
 
-resource deploymentScriptFailure 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
-  name: 'test-deployment-script-failure'
-  location: location
-  kind: 'AzurePowerShell'
-  dependsOn: [deploymentScriptSuccess]
-  properties: {
-    forceUpdateTag: guidId
-    azPowerShellVersion: '9.7'
-    scriptContent: '''
-    $ErrorActionPreference = "Stop"
-    Set-StrictMode -Version Latest
+// resource deploymentScriptFailure 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
+//   name: 'test-deployment-script-failure'
+//   location: location
+//   kind: 'AzurePowerShell'
+//   dependsOn: [deploymentScriptSuccess]
+//   properties: {
+//     forceUpdateTag: guidId
+//     azPowerShellVersion: '9.7'
+//     scriptContent: '''
+//     $ErrorActionPreference = "Stop"
+//     Set-StrictMode -Version Latest
 
-    Write-Host 'Writing to Host: TEST FAILURE'
-    Write-Output 'Writing to Output: TEST FAILURE'
-    Start-Sleep -Seconds 15
+//     Write-Host 'Writing to Host: TEST FAILURE'
+//     Write-Output 'Writing to Output: TEST FAILURE'
+//     Start-Sleep -Seconds 15
 
-    Write-Error '!!! TESTING FAILURE'
+//     Write-Error '!!! TESTING FAILURE'
 
-    '''
-    cleanupPreference: 'OnSuccess'
-    retentionInterval: 'PT1H'
-  }
-}
+//     '''
+//     cleanupPreference: 'OnSuccess'
+//     retentionInterval: 'PT1H'
+//   }
+// }
 
-resource failureLogs 'Microsoft.Resources/deploymentScripts/logs@2020-10-01' existing = {
-  parent: deploymentScriptFailure
-  name: 'default'
-}
+// resource failureLogs 'Microsoft.Resources/deploymentScripts/logs@2020-10-01' existing = {
+//   parent: deploymentScriptFailure
+//   name: 'default'
+// }
 
 output successLlogs string = successLogs.properties.log
 output testKey string = deploymentScriptSuccess.properties.outputs.testKey
-output failureLogs string = failureLogs.properties.log
+// output failureLogs string = failureLogs.properties.log
