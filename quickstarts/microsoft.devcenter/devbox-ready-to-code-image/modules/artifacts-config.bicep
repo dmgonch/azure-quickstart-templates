@@ -40,7 +40,7 @@ output baseImageFull string = empty(baseImage)
 
 var defaultImageBuildProfile = {
   diskSize: 512
-  sku: 'Standard_D8_v4'
+  sku: 'Standard_D2_v4'
 }
 
 output imageBuildProfile object = union(defaultImageBuildProfile, imageBuildProfile)
