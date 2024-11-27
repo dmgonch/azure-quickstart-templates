@@ -2,8 +2,8 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 $ProgressPreference = 'SilentlyContinue'
 
-RunWithRetries { Connect-AzAccount -Identity }
-RunWithRetries { Install-Module -Name Az.ImageBuilder -AllowPrerelease -Force }
+RunWithRetries { Connect-AzAccount -Identity | Out-Null }
+RunWithRetries { Install-Module -Name Az.ImageBuilder -AllowPrerelease -Force | Out-Null }
 
 Write-Host "=== Starting the image build"
 RunWithRetries {

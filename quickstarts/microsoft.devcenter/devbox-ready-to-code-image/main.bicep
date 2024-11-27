@@ -15,7 +15,7 @@ param imageBuildTimeoutInMinutes int = 180
 
 // In the case of an error do not fail the deployment but rather return the tail of the customization log.
 // Useful when debugging image build failures in PR validation pipelines (https://dev.azure.com/azurequickstarts/azure-quickstart-templates/_build).
-param ignoreBuildFailure bool = false
+param ignoreBuildFailure bool = true
 
 param artifactsRepo {
   Url: string
@@ -46,8 +46,9 @@ var imagesWithDefaults = union(defaultImages, images)
 
 var artifactsRepoWithDefaults = union(
   {
+    // TODO: Switch to 'https://github.com/Azure/azure-quickstart-templates' after the changes are merged
     Url: 'https://github.com/dmgonch/azure-quickstart-templates'
-    Path: 'quickstarts/microsoft.devcenter/devbox-test-image/tools/artifacts'
+    Path: 'quickstarts/microsoft.devcenter/devbox-ready-to-code-image/tools/artifacts'
     // TODO: Switch to 'master' branch after the changes are merged
     Branch: 'add-devbox-ready-to-code-image-sample'
   },
