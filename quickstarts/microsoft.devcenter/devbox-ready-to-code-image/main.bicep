@@ -28,12 +28,10 @@ param images types.images = {}
 var defaultImages = {
   eShop: {
     name: 'quickstart-eShop'
-    baseImage: ''
     shouldBuild: true
   }
   axios: {
     name: 'quickstart-axios'
-    baseImage: ''
     shouldBuild: true
   }
   MSBuildSdks: {
@@ -61,7 +59,7 @@ module eShop 'images/eShop.bicep' = if (imagesWithDefaults.eShop.shouldBuild) {
     location: location
     imageName: imagesWithDefaults.eShop.name
     isBaseImage: isBaseImage
-    baseImage: imagesWithDefaults.eShop.baseImage
+    baseImage: imagesWithDefaults.eShop.?baseImage ?? ''
     builderIdentity: builderIdentity
     imageIdentity: imageIdentity
     galleryName: galleryName
@@ -82,7 +80,7 @@ module axios 'images/axios.bicep' = if (imagesWithDefaults.axios.shouldBuild) {
     location: location
     imageName: imagesWithDefaults.axios.name
     isBaseImage: isBaseImage
-    baseImage: imagesWithDefaults.axios.baseImage
+    baseImage: imagesWithDefaults.axios.?baseImage ?? ''
     builderIdentity: builderIdentity
     imageIdentity: imageIdentity
     galleryName: galleryName
