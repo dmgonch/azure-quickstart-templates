@@ -77,4 +77,3 @@ How to manage the solution
 Solution notes
 
 `Tags: Tag1, Tag2, Tag3`
-
