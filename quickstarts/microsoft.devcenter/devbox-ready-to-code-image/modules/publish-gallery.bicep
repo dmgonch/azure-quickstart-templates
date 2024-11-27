@@ -29,7 +29,7 @@ var imageDefinitionProperties = {
   }
 }
 
-resource publishGallery 'Microsoft.Compute/galleries@2022-01-03' existing = if (!empty(galleryName)) {
+resource publishGallery 'Microsoft.Compute/galleries@2023-07-03' existing = if (!empty(galleryName)) {
   name: galleryName
 
   resource newImageDef 'images' = {
