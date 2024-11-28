@@ -16,7 +16,7 @@ param imageBuildTimeoutInMinutes int = 180
 // In the case of an error do not fail the deployment but rather return the tail of the customization log.
 // Useful when debugging image build failures in PR validation pipelines (https://dev.azure.com/azurequickstarts/azure-quickstart-templates/_build).
 // TODO: Switch to false before merging the changes to catch future regressions.
-param ignoreBuildFailure bool = true
+param ignoreBuildFailure bool = false
 
 param artifactsRepo {
   Url: string
@@ -60,7 +60,7 @@ module eShop 'images/eShop.bicep' = if (imagesWithDefaults.eShop.shouldBuild) {
     location: location
     imageName: imagesWithDefaults.eShop.name
     isBaseImage: isBaseImage
-    baseImage: imagesWithDefaults.eShop.?baseImage ?? ''
+    // baseImage: imagesWithDefaults.eShop.?baseImage ?? ''
     builderIdentity: builderIdentity
     imageIdentity: imageIdentity
     galleryName: galleryName
