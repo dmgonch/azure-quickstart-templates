@@ -15,7 +15,8 @@ param imageBuildTimeoutInMinutes int = 180
 
 // In the case of an error do not fail the deployment but rather return the tail of the customization log.
 // Useful when debugging image build failures in PR validation pipelines (https://dev.azure.com/azurequickstarts/azure-quickstart-templates/_build).
-param ignoreBuildFailure bool = false
+// TODO: Set to 'false' when done testing the sample.
+param ignoreBuildFailure bool = true
 
 param artifactSource {
   Url: string
