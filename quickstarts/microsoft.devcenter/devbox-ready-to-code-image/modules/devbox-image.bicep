@@ -119,7 +119,7 @@ More at https://learn.microsoft.com/en-us/windows/package-manager/winget/#instal
 param installLatestWinGet bool = true
 
 @description('Git repository containing artifacts to be used in the image build')
-param artifactSource types.artifactSource?
+param artifactSource types.artifactSource
 
 @description('Number of lines to print from the end of the customization log. Value of -1 will print the entire log. Value of 0 will print nothing.')
 param printCustomizationLogLastLines int = 1000

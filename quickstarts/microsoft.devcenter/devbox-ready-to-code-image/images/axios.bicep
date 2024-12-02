@@ -15,7 +15,7 @@ param imageBuildProfile object
 param imageBuildTimeoutInMinutes int
 param baseImage string = ''
 param ignoreBuildFailure bool = false
-param artifactSource types.artifactSource?
+param artifactSource types.artifactSource
 
 var repos = [
   {

@@ -11,7 +11,7 @@ param artifacts array
 param buildProfile object
 param imageBuildTimeoutInMinutes int
 param publishingProfile object
-param artifactSource types.artifactSource?
+param artifactSource types.artifactSource
 param printCustomizationLogLastLines int
 param ignoreBuildFailure bool
 

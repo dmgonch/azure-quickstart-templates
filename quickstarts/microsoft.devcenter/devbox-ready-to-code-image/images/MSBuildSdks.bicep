@@ -10,7 +10,7 @@ param galleryName string
 param imageBuildProfile object
 param imageBuildTimeoutInMinutes int
 param ignoreBuildFailure bool = false
-param artifactSource types.artifactSource?
+param artifactSource types.artifactSource
 
 module devBoxImage '../modules/devbox-image.bicep' = {
   name: 'MSBuildSdks-${uniqueString(deployment().name, resourceGroup().name)}'
