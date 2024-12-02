@@ -1,9 +1,11 @@
+import * as types from '../exports.bicep'
+
 param location string = resourceGroup().location
 
 @description('Used to name "VM image definition" and some other Azure resources.')
 param imageName string
 
-@description('Specifies whether the image is a base image, i.e. that is not meant to be used direcly by users but as a base for other images. Base images cannot be used with Dev Box service at the moment.')
+@description('Specifies whether the image is a base image, i.e. that is not meant to be used directly by users but as a base for other images. Base images cannot be used with Dev Box service at the moment.')
 param isBaseImage bool
 
 @description('''
@@ -116,11 +118,8 @@ More at https://learn.microsoft.com/en-us/windows/package-manager/winget/#instal
 ''')
 param installLatestWinGet bool = true
 
-param artifactSource {
-  Url: string
-  Branch: string
-  Path: string
-}
+@description('Git repository containing artifacts to be used in the image build')
+param artifactSource types.artifactSource?
 
 @description('Number of lines to print from the end of the customization log. Value of -1 will print the entire log. Value of 0 will print nothing.')
 param printCustomizationLogLastLines int = 1000

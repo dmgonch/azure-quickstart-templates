@@ -22,3 +22,10 @@ type results = {
   axios: imageResult
   MSBuildSdks: imageResult
 }
+
+@export()
+type artifactSource = {
+  Url: string
+  Branch: string
+  Path: string
+}

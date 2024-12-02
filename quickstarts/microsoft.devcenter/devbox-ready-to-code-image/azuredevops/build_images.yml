@@ -5,6 +5,8 @@ pool:
 
 variables:
   # The variables are referenced from build_images.ps1 script
+
+  # Required variables
   SUBSCRIPTION_ID: $[ variables['PipelineVars_SubscriptionId'] ]
   RESOURCE_GROUP: $[ variables['PipelineVars_ResourceGroup'] ]
   BUILDER_IDENTITY: $[ variables['PipelineVars_BuilderIdentity'] ]
@@ -12,10 +14,13 @@ variables:
   GALLERY_NAME: $[ variables['PipelineVars_GalleryName'] ]
   RESOURCES_LOCATION: $[ variables['PipelineVars_Location'] ]
   VM_SKU: $[ variables['PipelineVars_VmSku'] ]
+  
+  # Optional variables
   ARTIFACTS_SOURCE_OBJ: $[ variables['PipelineVars_ArtifactSourceObj'] ]
-  DEPLOYMENT_NAME: $(Build.BuildId)_$(System.JobId)
   PIPELINE_TIMEOUT_IN_MINUTES: 180
 
+  # Internal use variables
+  DEPLOYMENT_NAME: $(Build.BuildId)_$(System.JobId)
   ThisFileRelativeDir: $[ coalesce(variables['PipelineVars_ThisFileRelativeDir'], 'quickstarts/microsoft.devcenter/devbox-ready-to-code-image') ]
 
 jobs:

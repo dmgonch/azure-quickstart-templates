@@ -1,3 +1,5 @@
+import * as types from '../exports.bicep'
+
 param guidId string = newGuid()
 param imageName string
 param location string
@@ -9,11 +11,7 @@ param artifacts array
 param buildProfile object
 param imageBuildTimeoutInMinutes int
 param publishingProfile object
-param artifactSource {
-  Url: string
-  Branch: string
-  Path: string
-}
+param artifactSource types.artifactSource?
 param printCustomizationLogLastLines int
 param ignoreBuildFailure bool
 

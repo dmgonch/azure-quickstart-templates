@@ -1,28 +1,53 @@
 import * as types from 'exports.bicep'
 
-// Refer to modules/devbox-image.bicep for parameter descriptions
+// Find full list of Dev Box Image Template parameters in to modules/devbox-image.bicep
+
+@description('Location for all resources.')
 param location string = resourceGroup().location
+
+@description('Full resource ID of Azure Managed Identity to be associated with Azure Image Builder Template and helper deployment scripts')
 param builderIdentity string
+
+@description('Full resource ID of Azure Managed Identity to use when accessing Azure and Azure DevOps resources during image creation')
 param imageIdentity string
+
+@description('''
+Name of the Compute Gallery where to publish the resulting image. The gallery is assumed to be in the same resource group as the resulting image.
+This parameter is ignored if imagePublishingProfile explicitly defines the list of Compute Galleries via its computeGalleries property.
+''')
 param galleryName string
+
+@description('Compute Gallery resource group. Ignored if galleryName is not provided.')
 param galleryResourceGroup string = resourceGroup().name
+
+@description('Compute Gallery subscription id. Ignored if galleryName is not provided.')
 param gallerySubscriptionId string = subscription().subscriptionId
+
+@description('Whether to create a separate volume, format it with Dev Drive and use the volume for all repos, caches and related tools.')
 param createDevDrive bool = true
+
+@description('Minimum size of the OS drive in GB if a separate Dev Drive volume is created.')
 param osDriveMinSizeGB int = 160
+
+@description('Custom VS SKU to use when allocating the VM for image creation')
 param imageBuildProfile object = {}
+
+@description('Specifies whether the image is a base image, i.e. that is not meant to be used directly by users but as a base for other images. Base images cannot be used with Dev Box service at the moment.')
 param isBaseImage bool = false
+
+@description('Timeout in minutes for the image build process')
 param imageBuildTimeoutInMinutes int = 180
 
-// In the case of an error do not fail the deployment but rather return the tail of the customization log.
-// Useful when debugging image build failures in PR validation pipelines (https://dev.azure.com/azurequickstarts/azure-quickstart-templates/_build).
+@description('Git repository containing artifacts to be used in the image build')
+param artifactSource types.artifactSource?
+
+@description('''
+In the case of an error do not fail the deployment but rather return the tail of the customization log.
+Useful when debugging image build failures in PR validation pipelines (https://dev.azure.com/azurequickstarts/azure-quickstart-templates/_build).
+''')
 param ignoreBuildFailure bool = false
 
-param artifactSource {
-  Url: string
-  Branch: string
-  Path: string
-}?
-
+@description('Custom sample images configuration')
 param images types.images = {}
 
 var defaultImages = {

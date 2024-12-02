@@ -1,4 +1,6 @@
-// Refer to modules/devbox-image.bicep for parameter descriptions
+import * as types from '../exports.bicep'
+
+// Refer to modules/devbox-image.bicep for Dev Box Image Template parameter descriptions
 
 param location string = resourceGroup().location
 param imageName string
@@ -8,12 +10,7 @@ param galleryName string
 param imageBuildProfile object
 param imageBuildTimeoutInMinutes int
 param ignoreBuildFailure bool = false
-
-param artifactSource {
-  Url: string
-  Branch: string
-  Path: string
-}
+param artifactSource types.artifactSource?
 
 module devBoxImage '../modules/devbox-image.bicep' = {
   name: 'MSBuildSdks-${uniqueString(deployment().name, resourceGroup().name)}'

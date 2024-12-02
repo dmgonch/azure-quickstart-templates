@@ -1,4 +1,6 @@
-// Refer to modules/devbox-image.bicep for parameter descriptions
+import * as types from '../exports.bicep'
+
+// Refer to modules/devbox-image.bicep for Dev Box Image Template parameter descriptions
 
 param location string = resourceGroup().location
 param imageName string
@@ -14,12 +16,7 @@ param imageBuildProfile object
 param imageBuildTimeoutInMinutes int
 param baseImage string = ''
 param ignoreBuildFailure bool = false
-
-param artifactSource {
-  Url: string
-  Branch: string
-  Path: string
-}
+param artifactSource types.artifactSource?
 
 var restoreCommands = [
   'dotnet workload restore'
@@ -39,6 +36,9 @@ var repos = [
     Build: {
       RunBuildScript: join(buildTestCommands, ' && ')
     }
+  }
+  {
+    Url: 'https://github.com/Azure-Samples/eShopOnAzure'
   }
 ]
 

@@ -1,5 +1,6 @@
-// Refer to modules/devbox-image.bicep for parameter descriptions
+import * as types from '../exports.bicep'
 
+// Refer to modules/devbox-image.bicep for Dev Box Image Template parameter descriptions
 param location string = resourceGroup().location
 param imageName string
 param isBaseImage bool
@@ -14,26 +15,21 @@ param imageBuildProfile object
 param imageBuildTimeoutInMinutes int
 param baseImage string = ''
 param ignoreBuildFailure bool = false
-
-param artifactSource {
-  Url: string
-  Branch: string
-  Path: string
-}
+param artifactSource types.artifactSource?
 
 var repos = [
   {
     Url: 'https://github.com/axios/axios'
     Kind: 'Custom'
-    HistoryDepth: 0
+    HistoryDepth: 100
     CustomScript: 'npm install && npm run build'
 
     DesktopShortcutName: 'axios repo'
-    DesktopShortcutRunAsAdmin: false
     DesktopShortcutHost: 'Terminal'
   }
   {
     Url: 'https://github.com/Azure/azure-quickstart-templates'
+    DesktopShortcutEnable: true
   }
 ]
 
