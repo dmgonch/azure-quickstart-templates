@@ -15,9 +15,7 @@
 
 [![Visualize](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.svg?sanitize=true)](http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.devcenter%2Fdevbox-ready-to-code-image%2Fazuredeploy.json)
 
-This sample demonstrates building `Ready-To-Code` images containing everything a developer needs (configuration, source, packages, binaries) to minimize the time used for setting up a new Dev Box. The sample relies on Dev Box Image Template to provide flexible approach for building images using Azure Image Builder.
-
-For larger teams, representing `Ready-To-Code` environments via `Infrastructure-As-Code` is extremely complex due to larger repositories, more tools (sometimes proprietary or legacy), and slower builds. Many customization steps are often similar across teams, but dedicating time and effort to create and maintain a sharable set of customizations is challenging. Making these customizations flexible enough to meet the needs of most teams in a large company is even harder. The Dev Box Image Template presented in this sample is targeted at addressing these challenges while using generic technologies like `Bicep`, `Azure Image Builder`, `Azure DevOps`.
+This sample demonstrates building `Ready-To-Code` images containing everything a developer needs (configuration, source, packages, binaries) to minimize the time used for setting up a new Dev Box. The sample relies on Dev Box Image Template to provide flexible approach for building images using Azure Image Builder. See as well [this blog post](#TODO-ADD-POST-LINK).
 
 ## Deployed Resources
 The sample builds 3 images to demonstrate various configuration options of the Dev Box Image Template. For each image the template creates the following Azure resources:

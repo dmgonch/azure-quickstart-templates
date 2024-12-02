@@ -25,7 +25,7 @@ var restoreCommands = [
 
 var buildTestCommands = [
   'dotnet build --no-restore --disable-build-servers --framework net9.0 src/ClientApp/ClientApp.sln'
-  'dotnet test --no-restore --disable-build-servers --framework net9.0 tests/ClientApp.UnitTests/ClientApp.UnitTests.csproj'
+  'dotnet test --no-build --no-restore --disable-build-servers --framework net9.0 tests/ClientApp.UnitTests/ClientApp.UnitTests.csproj'
 ]
 
 var repos = [
