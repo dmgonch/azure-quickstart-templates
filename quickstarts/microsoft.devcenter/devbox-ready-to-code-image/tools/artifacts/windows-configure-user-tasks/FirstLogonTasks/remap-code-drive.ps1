@@ -58,6 +58,6 @@ if (( -not(Test-Path variable:global:IsUnderTest)) -or (-not $global:IsUnderTest
         RemapCodeDrive($TaskParams)
     }
     catch {
-        Write-Host "!!! [ERROR] Unhandled exception:`n$_`n$($_.ScriptStackTrace)"
+        Write-Host "!!! [WARN] Unhandled exception (will be ignored):`n$_`n$($_.ScriptStackTrace)"
     }
 }

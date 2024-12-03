@@ -13,5 +13,5 @@ try {
     & $pwsh7Exe -ExecutionPolicy Bypass -NoProfile -NoLogo -NonInteractive -File (Join-Path $PSScriptRoot 'configure-winget-pwsh7.ps1')
 }
 catch {
-    LogWithTimestamp "!!! [WARN] Unhandled exception:`n$_`n$($_.ScriptStackTrace)"
+    LogWithTimestamp "!!! [WARN] Unhandled exception (will be ignored):`n$_`n$($_.ScriptStackTrace)"
 }

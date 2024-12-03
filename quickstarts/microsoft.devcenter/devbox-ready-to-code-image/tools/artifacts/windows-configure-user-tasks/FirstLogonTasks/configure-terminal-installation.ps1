@@ -16,7 +16,5 @@ try {
     
 }
 catch {
-    Write-Host "[WARN] Unhandled exception (will be ignored):"
-    Write-Host -Object $e
-    Write-Host -Object $e.ScriptStackTrace
+    Write-Host "!!! [WARN] Unhandled exception (will be ignored):`n$_`n$($_.ScriptStackTrace)"
 }
