@@ -36,12 +36,15 @@ param aiServiceAccountSubscriptionId string
 @description('AI Service Account kind: either OpenAI or AIServices')
 param aiServiceKind string 
 
+@description('Resource ID of the key vault resource for storing connection strings')
+param keyVaultId string
+
 resource aiServices 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
   name: aiServicesName
   scope: resourceGroup(aiServiceAccountSubscriptionId, aiServiceAccountResourceGroupName)
 }
 
-resource aiHub 'Microsoft.MachineLearningServices/workspaces@2024-07-01-preview' = {
+resource aiHub 'Microsoft.MachineLearningServices/workspaces@2024-10-01-preview' = {
   name: aiHubName
   location: location
   tags: tags
@@ -54,12 +57,13 @@ resource aiHub 'Microsoft.MachineLearningServices/workspaces@2024-07-01-preview'
     description: aiHubDescription
 
     // dependent resources
+    keyVault: keyVaultId
     storageAccount: storageAccountId
     systemDatastoresAuthMode: 'identity'
   }
   kind: 'hub'
 
-    resource aiServicesConnection 'connections@2024-07-01-preview' = {
+    resource aiServicesConnection 'connections@2024-10-01-preview' = {
     name: '${aiHubName}-connection-AIServices'
     properties: {
       category: aiServiceKind

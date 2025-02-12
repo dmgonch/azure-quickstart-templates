@@ -43,7 +43,7 @@ param modelSkuName string = 'GlobalStandard'
 param modelCapacity int = 50
 
 @description('Model deployment location. If you want to deploy an Azure AI resource/model in different location than the rest of the resources created.')
-param modelLocation string = 'eastus'
+param modelLocation string = ''
 
 @description('The AI Service Account full ARM Resource ID. This is an optional field, and if not provided, the resource will be created.')
 param aiServiceAccountResourceId string = ''
@@ -72,6 +72,8 @@ var aiServiceParts = split(aiServiceAccountResourceId, '/')
 var aiServiceAccountSubscriptionId = aiServiceExists ? aiServiceParts[2] : subscription().subscriptionId 
 var aiServiceAccountResourceGroupName = aiServiceExists ? aiServiceParts[4] : resourceGroup().name
 
+var differentModelLocation = modelLocation != '' ? modelLocation : location
+
 // Dependent resources for the Azure Machine Learning workspace
 module aiDependencies 'modules-basic/basic-dependent-resources.bicep' = {
   name: 'dependencies-${name}-${uniqueSuffix}-deployment'
@@ -79,6 +81,7 @@ module aiDependencies 'modules-basic/basic-dependent-resources.bicep' = {
     aiServicesName: '${aiServicesName}${uniqueSuffix}'
     aiServiceAccountResourceId: aiServiceAccountResourceId
     storageName: '${storageName}${uniqueSuffix}'
+    keyvaultName: 'kv-${name}-${uniqueSuffix}'
     location: location
 
      // Model deployment parameters
@@ -87,7 +90,7 @@ module aiDependencies 'modules-basic/basic-dependent-resources.bicep' = {
      modelVersion: modelVersion
      modelSkuName: modelSkuName
      modelCapacity: modelCapacity
-     modelLocation: modelLocation
+     modelLocation: differentModelLocation
   }
 }
 
@@ -99,6 +102,8 @@ module aiHub 'modules-basic/basic-ai-hub-identity.bicep' = {
     aiHubFriendlyName: aiHubFriendlyName
     aiHubDescription: aiHubDescription
     location: location
+    keyVaultId: aiDependencies.outputs.keyvaultId
+
     tags: tags
 
     // dependent resources

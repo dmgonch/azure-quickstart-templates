@@ -123,7 +123,6 @@ module aiHub 'modules-standard/standard-ai-hub.bicep' = {
     aiHubDescription: aiHubDescription
     location: location
     tags: tags
-    capabilityHostName: '${name}-${uniqueSuffix}-${capabilityHostName}'
 
     aiSearchName: aiDependencies.outputs.aiSearchName
     aiSearchId: aiDependencies.outputs.aisearchID
@@ -152,13 +151,7 @@ module aiProject 'modules-standard/standard-ai-project.bicep' = {
     aiProjectDescription: aiProjectDescription
     location: location
     tags: tags
-    
-    // dependent resources
-    capabilityHostName: '${projectName}-${uniqueSuffix}-${capabilityHostName}'
-
     aiHubId: aiHub.outputs.aiHubID
-    acsConnectionName: aiHub.outputs.acsConnectionName
-    aoaiConnectionName: aiHub.outputs.aoaiConnectionName
   }
 }
 
@@ -180,6 +173,20 @@ module aiSearchRoleAssignments 'modules-standard/ai-search-role-assignments.bice
     aiProjectPrincipalId: aiProject.outputs.aiProjectPrincipalId
     aiProjectId: aiProject.outputs.aiProjectResourceId
   }
+}
+
+module addCapabilityHost 'modules-standard/add-capability-host.bicep' = {
+  name: 'capabilityHost-configuration--${uniqueSuffix}-deployment'
+  params: {
+    capabilityHostName: '${uniqueSuffix}-${capabilityHostName}'
+    aiHubName: aiHub.outputs.aiHubName
+    aiProjectName: aiProject.outputs.aiProjectName
+    acsConnectionName: aiHub.outputs.acsConnectionName
+    aoaiConnectionName: aiHub.outputs.aoaiConnectionName
+  }
+  dependsOn: [
+    aiSearchRoleAssignments,aiServiceRoleAssignments
+  ]
 }
 
 output PROJECT_CONNECTION_STRING string = aiProject.outputs.projectConnectionString
