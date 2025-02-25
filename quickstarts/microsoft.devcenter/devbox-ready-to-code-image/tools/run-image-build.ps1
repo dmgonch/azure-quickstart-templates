@@ -16,9 +16,7 @@ function Log([string] $message, [switch] $asError) {
 }
 
 RunWithRetries { Connect-AzAccount -Identity | Out-Null }
-
-# Load version 0.4.1 of Az.ImageBuilder module to work around https://github.com/Azure/azvmimagebuilder/issues/64?reload=1?reload=1
-RunWithRetries { Install-Module -Name Az.ImageBuilder -AllowPrerelease -Force -Verbose -RequiredVersion 0.4.1 }
+RunWithRetries { Install-Module -Name Az.ImageBuilder -AllowPrerelease -Force -Verbose }
 
 $preBuildPauseSeconds = 30
 Log "=== Pausing for $preBuildPauseSeconds seconds for the template and prerequisites to complete initialization"
