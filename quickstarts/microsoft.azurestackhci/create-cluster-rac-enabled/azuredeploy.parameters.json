@@ -6,13 +6,13 @@
             "value": "Validate"
         },
         "keyVaultName": {
-            "value": ""
+            "value": "armdeploykv"
         },
         "softDeleteRetentionDays": {
             "value": 30
         },
         "diagnosticStorageAccountName": {
-            "value": ""
+            "value": "partnerdiagsa3"
         },
         "logsRetentionInDays": {
             "value": 30
@@ -21,7 +21,7 @@
             "value": "Standard_LRS"
         },
         "clusterName": {
-            "value": ""
+            "value": "cluster1"
         },
         "location": {
             "value": "eastus"
@@ -33,7 +33,7 @@
             "value": "Cloud"
         },
         "clusterWitnessStorageAccountName": {
-            "value": ""
+            "value": "cluster1witnessthoroet"
         },
         "localAdminUserName": {
             "value": "administrator"
@@ -42,7 +42,7 @@
             "value": null
         },
         "AzureStackLCMAdminUsername": {
-            "value": ""
+            "value": "lcmuser"
         },
         "AzureStackLCMAdminPasssword": {
             "value": null
@@ -51,20 +51,19 @@
             "value": ""
         },
         "arcNodeResourceIds": {
-            "value":  
-            [
-            "/subscriptions/YourSubscriptionID/resourceGroups/YourResourceGroupName/providers/Microsoft.HybridCompute/machines/Node1",
-            "/subscriptions/YourSubscriptionID/resourceGroups/YourResourceGroupName/providers/Microsoft.HybridCompute/machines/Node2"
+            "value": [
+                "/subscriptions/86a43cee-777a-4d3e-b9bc-80d6a9c6c73c/resourceGroups/ARMRG/providers/Microsoft.HybridCompute/machines/vhost1",
+                "/subscriptions/86a43cee-777a-4d3e-b9bc-80d6a9c6c73c/resourceGroups/ARMRG/providers/Microsoft.HybridCompute/machines/vhost2"
             ]
         },
         "domainFqdn": {
-            "value": "contoso.com"
+            "value": "s31r1501.masd.stbtest.microsoft.com"
         },
         "namingPrefix": {
-            "value": "HCI"
+            "value": "HCI002"
         },
         "adouPath": {
-            "value": "OU=HCI,DC=contoso,DC=com"
+            "value": "OU=HCI002,DC=s31r1501,DC=masd,DC=stbtest,DC=microsoft,DC=com"
         },
         "securityLevel": {
             "value": "Recommended"
@@ -109,14 +108,14 @@
             "value": "100.69.32.1"
         },
         "startingIPAddress": {
-            "value": "100.69.32.70"
+            "value": "100.69.32.21"
         },
         "endingIPAddress": {
-            "value": "100.69.32.80"
+            "value": "100.69.32.27"
         },
         "dnsServers": {
             "value": [
-                "100.69.32.254"
+                "100.71.45.125"
             ]
         },
         "useDhcp": {
@@ -125,72 +124,46 @@
         "physicalNodesSettings": {
             "value": [
                 {
-                "name": "Node1",
-                "ipv4Address": "100.69.32.64"
+                    "name": "vhost1",
+                    "ipv4Address": "100.69.32.20"
                 },
                 {
-                "name": "Node2",
-                "ipv4Address": "100.69.32.65"
+                    "name": "vhost2",
+                    "ipv4Address": "100.69.32.24"
                 }
-                     ]
+            ]
         },
         "networkingType": {
             "value": "switchedMultiServerDeployment"
         },
         "networkingPattern": {
-            "value": "convergedManagementCompute"
+            "value": "hyperConverged"
         },
         "intentList": {
             "value": [
                 {
-                    "name": "Compute_Management",
+                    "name": "Compute_Management_Storage",
                     "trafficType": [
                         "Management",
-                        "Compute"
-                    ],
-                    "adapter": [
-                        "NIC1",
-                        "NIC2"
-                    ],
-                    "overrideVirtualSwitchConfiguration": false,
-                    "virtualSwitchConfigurationOverrides": {
-                        "enableIov": "",
-                        "loadBalancingAlgorithm": ""
-                    },
-                    "overrideQosPolicy": false,
-                    "qosPolicyOverrides": {
-                        "priorityValue8021Action_Cluster": "7",
-                        "priorityValue8021Action_SMB": "3",
-                        "bandwidthPercentage_SMB": "50"
-                    },
-                    "overrideAdapterProperty": false,
-                    "adapterPropertyOverrides": {
-                        "jumboPacket": "9014",
-                        "networkDirect": "Enabled",
-                        "networkDirectTechnology": "RoCEv2"
-                    }
-                },
-                {
-                    "name": "Storage",
-                    "trafficType": [
+                        "Compute",
                         "Storage"
                     ],
                     "adapter": [
-                        "SMB1",
-                        "SMB2"
+                        "Ethernet",
+                        "Ethernet 2"
                     ],
                     "overrideVirtualSwitchConfiguration": false,
                     "virtualSwitchConfigurationOverrides": {
                         "enableIov": "",
                         "loadBalancingAlgorithm": ""
                     },
-                    "overrideQosPolicy": false,
+                    "overrideQosPolicy": true,
                     "qosPolicyOverrides": {
                         "priorityValue8021Action_Cluster": "7",
                         "priorityValue8021Action_SMB": "3",
                         "bandwidthPercentage_SMB": "50"
                     },
-                    "overrideAdapterProperty": false,
+                    "overrideAdapterProperty": true,
                     "adapterPropertyOverrides": {
                         "jumboPacket": "9014",
                         "networkDirect": "Enabled",
@@ -198,42 +171,18 @@
                     }
                 }
             ]
-          },
-          "storageNetworkList": {
+        },
+        "storageNetworkList": {
             "value": [
                 {
                     "name": "StorageNetwork1",
-                    "networkAdapterName": "SMB1",
-                    "vlanId": "711",
-                    "storageAdapterIPInfo": [
-                        {
-                            "physicalNode": "Node1",
-                            "ipv4Address": "10.0.1.10",
-                            "subnetMask": "255.255.255.0"
-                        },
-                        {
-                            "physicalNode": "Node2",
-                            "ipv4Address": "10.0.1.11",
-                            "subnetMask": "255.255.255.0"
-                        }
-                    ]
+                    "networkAdapterName": "Ethernet",
+                    "vlanId": "711"
                 },
                 {
                     "name": "StorageNetwork2",
-                    "networkAdapterName": "SMB2",
-                    "vlanId": "712",
-                    "storageAdapterIPInfo": [
-                        {
-                            "physicalNode": "Node1",
-                            "ipv4Address": "10.0.2.10",
-                            "subnetMask": "255.255.255.0"
-                        },
-                        {
-                            "physicalNode": "Node2",
-                            "ipv4Address": "10.0.2.11",
-                            "subnetMask": "255.255.255.0"
-                        }
-                    ]
+                    "networkAdapterName": "Ethernet 2",
+                    "vlanId": "712"
                 }
             ]
         },
@@ -241,10 +190,29 @@
             "value": false
         },
         "enableStorageAutoIp": {
-            "value": false
-          },
+            "value": true
+        },
+        "clusterPattern": {
+            "value": "RackAware"
+        },
+        "localAvailabilityZones": {
+            "value": [
+                {
+                    "localAvailabilityZoneName": "ZoneA",
+                    "nodes": [
+                        "vhost1"
+                    ]
+                },
+                {
+                    "localAvailabilityZoneName": "ZoneB",
+                    "nodes": [
+                        "vhost2"
+                    ]
+                }
+            ]
+        },
         "customLocation": {
-            "value": "YourARBCustomLocation"
+            "value": "mylocation"
         },
         "sbeVersion":{
             "value": ""
